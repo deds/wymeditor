@@ -102,11 +102,13 @@ WYMeditor.WymCssParser.prototype.addStyleSetting = function(style_details)
         var details = style_details[name];
         if(typeof details == 'object' && name != 'title'){
 
-    this.css_settings.classesItems.push({
-        'name': WYMeditor.Helper.trim(details.name),
-        'title': style_details.title,
-        'expr' : WYMeditor.Helper.trim((details.expressions||details.tags).join(', '))
-    });
+    if (details.tags !== undefined) {
+        this.css_settings.classesItems.push({
+            'name': WYMeditor.Helper.trim(details.name),
+            'title': style_details.title,
+            'expr' : WYMeditor.Helper.trim((details.expressions||details.tags).join(', '))
+        });
+    }
     if(details.feedback_style){
         this.css_settings.editorStyles.push({
             'name': '.'+ WYMeditor.Helper.trim(details.name),
