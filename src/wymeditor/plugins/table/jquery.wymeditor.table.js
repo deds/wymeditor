@@ -78,7 +78,9 @@ function TableEditor(options, wym) {
             "</li>",
         sRemoveColumnButtonSelector: "li.wym_tools_remove_column a",
 
-        enableCellTabbing: true
+        enableCellTabbing: true,
+
+        enableToolbar: true
 
     }, options);
 
@@ -112,11 +114,13 @@ TableEditor.prototype.init = function () {
             wym._options.toolsSelector + wym._options.toolsListSelector
         );
 
-    tools.append(tableEditor._options.sMergeRowButtonHtml);
-    tools.append(tableEditor._options.sAddRowButtonHtml);
-    tools.append(tableEditor._options.sRemoveRowButtonHtml);
-    tools.append(tableEditor._options.sAddColumnButtonHtml);
-    tools.append(tableEditor._options.sRemoveColumnButtonHtml);
+    if (this._options.enableToolbar) {
+        tools.append(tableEditor._options.sMergeRowButtonHtml);
+        tools.append(tableEditor._options.sAddRowButtonHtml);
+        tools.append(tableEditor._options.sRemoveRowButtonHtml);
+        tools.append(tableEditor._options.sAddColumnButtonHtml);
+        tools.append(tableEditor._options.sRemoveColumnButtonHtml);
+    }
 
     tableEditor.bindEvents();
     rangy.init();
@@ -130,24 +134,26 @@ TableEditor.prototype.bindEvents = function () {
     var wym = this._wym,
         tableEditor = this;
 
-    // Handle tool button click
-    jQuery(wym._box).find(tableEditor._options.sMergeRowButtonSelector).click(function () {
-        var sel = rangy.getIframeSelection(wym._iframe);
-        tableEditor.mergeRow(sel);
-        return false;
-    });
-    jQuery(wym._box).find(tableEditor._options.sAddRowButtonSelector).click(function () {
-        return tableEditor.addRow(wym.selected());
-    });
-    jQuery(wym._box).find(tableEditor._options.sRemoveRowButtonSelector).click(function () {
-        return tableEditor.removeRow(wym.selected());
-    });
-    jQuery(wym._box).find(tableEditor._options.sAddColumnButtonSelector).click(function () {
-        return tableEditor.addColumn(wym.selected());
-    });
-    jQuery(wym._box).find(tableEditor._options.sRemoveColumnButtonSelector).click(function () {
-        return tableEditor.removeColumn(wym.selected());
-    });
+    if (tableEditor._options.enableToolbar) {
+        // Handle tool button click
+        jQuery(wym._box).find(tableEditor._options.sMergeRowButtonSelector).click(function () {
+            var sel = rangy.getIframeSelection(wym._iframe);
+            tableEditor.mergeRow(sel);
+            return false;
+        });
+        jQuery(wym._box).find(tableEditor._options.sAddRowButtonSelector).click(function () {
+            return tableEditor.addRow(wym.selected());
+        });
+        jQuery(wym._box).find(tableEditor._options.sRemoveRowButtonSelector).click(function () {
+            return tableEditor.removeRow(wym.selected());
+        });
+        jQuery(wym._box).find(tableEditor._options.sAddColumnButtonSelector).click(function () {
+            return tableEditor.addColumn(wym.selected());
+        });
+        jQuery(wym._box).find(tableEditor._options.sRemoveColumnButtonSelector).click(function () {
+            return tableEditor.removeColumn(wym.selected());
+        });
+    }
 
     // Handle tab clicks
     if (tableEditor._options.enableCellTabbing) {
