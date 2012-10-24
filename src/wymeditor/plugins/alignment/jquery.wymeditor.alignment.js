@@ -67,26 +67,54 @@ WYMeditor.editor.prototype.alignment = function () {
 
     $box.find('li.wym_tools_alignment_left a').click(function() {
 		var container = wym.container();
-		$(container).removeClass('align_left align_right align_justify align_center');
-		$(container).addClass('align_left');
+        if ($(container).hasClass('align_left')) {
+		    $(container).removeClass('align_left');
+        } else {
+		    $(container).removeClass('align_left align_right align_justify align_center');
+		    $(container).addClass('align_left');
+        }
+        if (!$(container).attr(WYMeditor.CLASS)) {
+            $(container).removeAttr('class');
+        }
 		return false;
 	});
     $box.find('li.wym_tools_alignment_center a').click(function() {
 		var container = wym.container();
-		$(container).removeClass('align_left align_right align_justify align_center');
-		$(container).addClass('align_center');
+        if ($(container).hasClass('align_center')) {
+		    $(container).removeClass('align_center');
+        } else {
+		    $(container).removeClass('align_left align_right align_justify align_center');
+		    $(container).addClass('align_center');
+        }
+        if (!$(container).attr(WYMeditor.CLASS)) {
+            $(container).removeAttr('class');
+        }
 		return false;
 	});
     $box.find('li.wym_tools_alignment_right a').click(function() {
 		var container = wym.container();
-		$(container).removeClass('align_left align_right align_justify align_center');
-		$(container).addClass('align_right');
+        if ($(container).hasClass('align_right')) {
+		    $(container).removeClass('align_right');
+        } else {
+		    $(container).removeClass('align_left align_right align_justify align_center');
+		    $(container).addClass('align_right');
+        }
+        if (!$(container).attr(WYMeditor.CLASS)) {
+            $(container).removeAttr('class');
+        }
 		return false;
 	});
     $box.find('li.wym_tools_alignment_justify a').click(function() {
 		var container = wym.container();
-		$(container).removeClass('align_left align_right align_justify align_center');
-		$(container).addClass('align_justify');
+        if ($(container).hasClass('align_justify')) {
+		    $(container).removeClass('align_justify');
+        } else {
+		    $(container).removeClass('align_left align_right align_justify align_center');
+		    $(container).addClass('align_justify');
+        }
+        if (!$(container).attr(WYMeditor.CLASS)) {
+            $(container).removeAttr('class');
+        }
 		return false;
 	});
 };
