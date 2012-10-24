@@ -29,7 +29,7 @@ WE_MIN = ${BUILD_DIR}/jquery.wymeditor.min.js
 WE_ARCH = wymeditor-${WYM_VER}.tar.gz
 
 MERGE = cat ${JS_FILES} | perl -pe 's/^\xEF\xBB\xBF//g' | ${VER} > ${WE}
-WE_MINIFIER = uglifyjs ${WE} > ${WE_MIN}
+WE_MINIFIER = ./node_modules/uglify-js/bin/uglifyjs ${WE} > ${WE_MIN}
 
 all: archive
 
@@ -48,7 +48,7 @@ min: wymeditor
 
 	@@echo " - Compressing using Uglifier"
 	@@${WE_MINIFIER}
-	
+
 	@@echo ${WE_MIN} "Built"
 	@@echo
 
@@ -69,6 +69,6 @@ archive: min
 	@@cp -pR ${WYM_DIR}/skins ${BUILD_DIR}/wymeditor/wymeditor
 
 	@@cd ${BUILD_DIR} && tar -czf ${WE_ARCH} wymeditor
-	
+
 	@@echo ${WE_ARCH} "Built"
 	@@echo
