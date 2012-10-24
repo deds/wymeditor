@@ -38,6 +38,8 @@ WYMeditor.editor.prototype.init = function () {
         WymClass = new WYMeditor.WymClassOpera(this);
     } else if (jQuery.browser.safari) {
         WymClass = new WYMeditor.WymClassSafari(this);
+    } else if (jQuery.browser.chrome) {
+        WymClass = new WYMeditor.WymClassSafari(this);
     }
 
     if (WymClass === false) {
